@@ -4,6 +4,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors')
 var path = require('path');
 var https = require('follow-redirects').https;
+var fs = require('fs');
 const { Chunk } = require('webpack');
 
 const port = 8081;
@@ -19,54 +20,52 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ extended: true }));
 
 app.get('/', (req, res) => {
-    console.log(url);
     res.sendFile('dist/index.html');
 });
 
 app.post('/add-url', (req, res) => {
     try{
         var articleUrl = req.body.url;
-        var query = `/sentiment-2.1?key=${process.env.API_KEY}&lang=en&url=${articleUrl}`;
         var options = {
             'method': 'POST',
             'hostname': url,
-            'path': query,
+            'path': `/sentiment-2.1?key=${process.env.API_KEY}&lang=en&url=${articleUrl}`,
             'headers': {
 
             },
             'maxRedirects': 20
         };
-        var result;
 
-        var request = https.request(options, (res) => {
+        console.log("Until here is good");
+        
+        var request = https.request(options, (response) => {
+            console.log("This, however, failed for some reason");
             var chunks = [];
 
-            res.on("data", chunk => {
+            response.on("data", chunk => {
                 chunks.push(chunk);
             });
 
-            res.on("end", chunk => {
+            response.on("end", (chunk) => {
                 var body = Buffer.concat(chunks);
-                result = body.toString();
-                console.log(result);
+
+                res.send({
+                    result: body.toString()
+                });
             });
 
-            res.on("error", err => {
+            response.on("error", err => {
                 console.log(err);
             });
         });
 
-        request.end((res) => {
-            res.status(200).send({
-                message: result
-            });
-        });
+        request.end();
 
-        res.status(200).send({
-            message: result
-        });
+        // res.send({
+        //     message: result
+        // });
     } catch (err) {
-        throw err;
+        console.log("Error here, hjelp!");
     }
     
 });

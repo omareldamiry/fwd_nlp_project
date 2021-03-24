@@ -12,9 +12,11 @@ function handleSubmit(event) {
     //     document.getElementById('results').innerHTML = res.message
     // });
 
+    document.querySelector('#results').innerHTML = "Loading ...";
     postData('http://localhost:8081/add-url', { url: formText })
     .then(data => {
-        console.log(data); // JSON data parsed by `data.json()` call
+      console.log("::: Results are fetched :::");
+        document.querySelector('#results').innerHTML = data.result;
     });
 }
 
