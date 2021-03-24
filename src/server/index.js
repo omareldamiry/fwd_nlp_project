@@ -35,11 +35,8 @@ app.post('/add-url', (req, res) => {
             },
             'maxRedirects': 20
         };
-
-        console.log("Until here is good");
         
         var request = https.request(options, (response) => {
-            console.log("This, however, failed for some reason");
             var chunks = [];
 
             response.on("data", chunk => {

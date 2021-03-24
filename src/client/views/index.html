@@ -9,10 +9,10 @@
     <header>
         <h2>Natural Language Processor Project</h2>
     </header>
-    <section>
+    <section class="center">
         <p>Enter article URL</p>
         <form onsubmit="return Client.handleSubmit(event)">
-            <input id="name" type="text" name="input" value="" placeholder="Name">
+            <input id="name" type="text" name="input" value="" placeholder="http(s)://example.com">
             <input type="submit" value="Process" onsubmit="return handleSubmit(event)" onclick="return Client.handleSubmit(event)">
         </form>
     </section>
@@ -21,7 +21,7 @@
         <div id="results"></div>
     </section>
     <footer>
-        <p>This is a footer.</p>
+        <p><i>by Omar Eldamiry</i>.</p>
     </footer>
 </body>
 </html>

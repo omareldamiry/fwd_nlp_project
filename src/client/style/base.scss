@@ -9,6 +9,7 @@
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
+  outline: 0;
 }
 
 body {
@@ -18,5 +19,10 @@ body {
   font-size: 1rem;
   font-weight: normal;
   line-height: 1.5;
-  color: #252a32;
+  background-color: #252a32;
+  color: white;
+}
+
+.center {
+  text-align: center;
 }
