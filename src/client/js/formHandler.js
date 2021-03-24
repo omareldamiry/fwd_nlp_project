@@ -2,7 +2,13 @@ function handleSubmit(event) {
     event.preventDefault();
 
     let formText = document.getElementById('name').value;
-    Client.checkForName(formText);
+    let results = document.querySelector('#results');
+    
+    if(!Client.checkForUrl(formText)) {
+      console.log(`::: ${formText} is NOT a url :::`);
+      results.innerHTML = "Invalid url. please enter a valid url";
+      return;
+    }
 
     console.log("::: Form Submitted :::");
     
@@ -12,11 +18,11 @@ function handleSubmit(event) {
     //     document.getElementById('results').innerHTML = res.message
     // });
 
-    document.querySelector('#results').innerHTML = "Loading ...";
+    results.innerHTML = "Loading ...";
     postData('http://localhost:8081/add-url', { url: formText })
     .then(data => {
       console.log("::: Results are fetched :::");
-        document.querySelector('#results').innerHTML = data.result;
+      results.innerHTML = data.result;
     });
 }
 

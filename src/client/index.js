@@ -1,10 +1,10 @@
 import { handleSubmit } from './js/formHandler.js'
-import { checkForName } from './js/nameChecker.js'
+import { checkForUrl } from './js/urlChecker.js'
 
-
+import './style/style.scss'
 
 export {
-    checkForName,
+    checkForUrl,
     handleSubmit
 }
 
