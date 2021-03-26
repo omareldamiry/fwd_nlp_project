@@ -10,7 +10,7 @@ const { Chunk } = require('webpack');
 const port = 8081;
 
 dotenv.config();
-const url = process.env.API_URL;
+const url = 'api.meaningcloud.com';
 
 const app = express();
 
